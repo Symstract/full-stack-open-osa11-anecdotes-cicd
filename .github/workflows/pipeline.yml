@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with:
-          node-version: '24'
+          node-version: "24"
       - name: Install dependencies
         run: npm ci
       - name: Check style
@@ -29,14 +29,14 @@ jobs:
     steps:
       - name: Trigger deployment
         run: curl ${{ secrets.RENDER_DEPLOY_HOOK }}
-  # notify_status:
-  #   needs: [lint_and_build, deploy]
-  #   if: ${{ !cancelled() && github.event_name == 'push' && !contains('#skip', join(github.event.commits.*.message)) }}
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: sarisia/actions-status-discord@v1
-  #       with:
-  #         webhook: ${{ secrets.DISCORD_WEBHOOK }}
+  notify_status:
+    needs: [lint_and_build, deploy]
+    if: ${{ !cancelled() && github.event_name == 'push' && !contains('#skip', join(github.event.commits.*.message)) }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     if: ${{ github.event_name == 'push' && !contains('#skip', join(github.event.commits.*.message)) }}
     needs: [lint_and_build, deploy]
