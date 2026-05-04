@@ -1,9 +1,9 @@
-import express from "express";
+const express = require("express");
 const app = express();
 
-import crypto from "crypto";
+const crypto = require("crypto");
 
-import db from "./db.json" with { type: "json" };
+const db = require("./db.json");
 
 const anecdotes = db.anecdotes;
 
