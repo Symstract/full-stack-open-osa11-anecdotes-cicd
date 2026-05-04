@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:3001/anecdotes",
+  baseURL: "/api/anecdotes",
 });
 
 const getAll = async () => {
@@ -10,7 +10,7 @@ const getAll = async () => {
 };
 
 const create = async (content) => {
-  const anecdote = { content, important: false };
+  const anecdote = { content, important: false, votes: 0 };
   const response = await api.post("/", anecdote);
   return response.data;
 };
