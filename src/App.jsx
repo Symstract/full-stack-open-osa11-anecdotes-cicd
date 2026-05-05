@@ -20,6 +20,7 @@ const App = () => {
       <Notification />
       <Filter />
       <AnecdoteForm />
+      <br />
       <AnecdoteList />
     </div>
   );
